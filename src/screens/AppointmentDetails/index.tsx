@@ -75,7 +75,7 @@ export function AppointmentDetails() {
 
             <ListHeader
                 title="Jogadores"
-                subtitle="Total 3"
+                subtitle="Total 2"
             />
 
             <FlatList

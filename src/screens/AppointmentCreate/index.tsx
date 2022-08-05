@@ -23,7 +23,7 @@ type appointmentCreateScreenProp = StackNavigationProp<RootStackParamList, 'Appo
 
 
 export function AppointmentCreate() {
-    const [category, setCategory] = useState('');
+    const [category, setCategory] = useState('1');
     const [openGuildsModal, setOpenGuildsModal] = useState(false);
     const [guild, setGuild] = useState<GuildProps>({} as GuildProps);
     const navigation = useNavigation<appointmentCreateScreenProp>();
@@ -36,9 +36,17 @@ export function AppointmentCreate() {
         setOpenGuildsModal(true);
     }
 
+    function handleCloseGuilds() {
+        setOpenGuildsModal(false);
+    }
+
     function handleGuildSelect(selectedGuild: GuildProps) {
         setGuild(selectedGuild);
         setOpenGuildsModal(false);
+    }
+
+    function handleCategorySelect(categoryId: string) {
+        setCategory(categoryId);
     }
 
     return (
@@ -61,7 +69,7 @@ export function AppointmentCreate() {
 
                     <CategorySelect
                         hasCheckBox
-                        setCategory={setCategory}
+                        setCategory={handleCategorySelect}
                         categorySelected={category}
                     />
 
@@ -90,7 +98,7 @@ export function AppointmentCreate() {
 
                         <View style={styles.field}>
                             <View>
-                                <Text style={styles.label}>
+                                <Text style={[styles.label, { marginBottom: 12 }]}>
                                     Dia e mês
                                 </Text>
 
@@ -105,7 +113,7 @@ export function AppointmentCreate() {
                             </View>
 
                             <View>
-                                <Text style={styles.label}>
+                                <Text style={[styles.label, { marginBottom: 12 }]}>
                                     Hora e minuto
                                 </Text>
 
@@ -146,7 +154,7 @@ export function AppointmentCreate() {
                     </View>
                 </View>
             </ScrollView>
-            <ModalView visible={openGuildsModal}>
+            <ModalView visible={openGuildsModal} closeModal={handleCloseGuilds}>
                 <Guilds handleSelectedGuild={handleGuildSelect} />
             </ModalView>
         </KeyboardAvoidingView>

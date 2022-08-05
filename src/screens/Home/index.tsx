@@ -58,7 +58,7 @@ export function Home() {
         navigation.navigate('AppointmentCreate');
     }
     return (
-        <View>
+        <View style={styles.container}>
             <View style={styles.header}>
                 <Profile />
                 <ButtonAdd onPress={handleAppointmentCreate} />
@@ -69,12 +69,11 @@ export function Home() {
                 setCategory={handleCategorySelect}
             />
 
-            <View style={styles.content}>
-                <ListHeader
-                    title="Partidas agendadas"
-                    subtitle="Total 6"
-                />
-            </View>
+            <ListHeader
+                title="Partidas agendadas"
+                subtitle="Total 6"
+            />
+
 
             <FlatList
                 data={appointments}
@@ -86,10 +85,10 @@ export function Home() {
                     />
                 )}
                 ItemSeparatorComponent={() => <ListDivider />}
+                contentContainerStyle={{ paddingBottom: 69 }}
                 style={styles.matches}
                 showsVerticalScrollIndicator={false}
             />
-
         </View>
     );
 
