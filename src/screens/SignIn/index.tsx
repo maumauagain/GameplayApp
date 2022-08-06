@@ -1,27 +1,26 @@
 import React from 'react';
-import { View, Text, Image } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '../RootStackParams';
+import { View, Text, Image, Alert, ActivityIndicator } from 'react-native';
 
 import { useAuth } from '../../hooks/auth';
 
 import IllustrationImg from '../../assets/illustration.png';
 import { styles } from './styles';
+import { theme } from '../../global/styles/theme';
 
 import { ButtonIcon } from '../../components/ButtonIcon';
 
-type signInScreenProp = StackNavigationProp<RootStackParamList, 'SignIn'>;
-
-
 export function SignIn() {
-    const navigation = useNavigation<signInScreenProp>();
+    console.log('SignIn/SignIn');
 
-    const { user } = useAuth();
-    console.log(user);
+    const { loading, signIn } = useAuth();
 
-    function handleSignIn() {
-        navigation.navigate('Home');
+    async function handleSignIn() {
+        console.log('SignIn/handleSignin');
+        try {
+            await signIn();
+        } catch (error: any) {
+            Alert.alert(error);
+        }
     }
 
     return (
@@ -44,14 +43,17 @@ export function SignIn() {
                     Crie grupos para jogar seu games {`\n`}
                     favoritos com seus amigos
                 </Text>
+                {
+                    loading
+                        ? <ActivityIndicator color={theme.colors.primary} />
+                        : <ButtonIcon
+                            title="Entrar com Discord"
+                            onPress={handleSignIn}
+                        />
+                }
 
-                <ButtonIcon
-                    title="Entrar com Discord"
-                    onPress={handleSignIn}
-                />
+
             </View>
-
-
 
         </View>
     );
