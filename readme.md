@@ -3,7 +3,7 @@
 </h1>
 
 <h1 align="center">
-    <img src="./media/signin.jpeg" alt="Sign In"/>
+    <img height="600" width="400"src="./media/signin.jpeg" alt="Sign In"/>
 </h1>
 
 ## 📝 Sobre
